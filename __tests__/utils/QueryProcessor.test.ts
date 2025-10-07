@@ -33,4 +33,10 @@ describe("QueryProcessor", () => {
             "wuli"
           ));
     })
+
+    test('should return largest number from list', () => {
+        const query = "Which of the following numbers is the largest: 43, 52, 14?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe("52");
+    })
 });
