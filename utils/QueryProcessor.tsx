@@ -32,5 +32,20 @@ export default function QueryProcessor(query: string): string {
     return "";
   }
 
+  // Handle simple addition queries like "What is 40 plus 58?"
+  // Recognize words: plus, add, sum, or the '+' symbol
+  if (lower.includes("plus") || lower.includes(" add ") || lower.includes("sum") || query.includes("+")) {
+    const numMatches = query.match(/-?\d+\.?\d*/g);
+    if (numMatches && numMatches.length > 0) {
+      // If there are at least two numbers, sum them all (or you could limit to first two)
+      const numbers = numMatches.map(n => Number(n));
+      const total = numbers.reduce((a, b) => a + b, 0);
+      // Return integer without decimal when applicable
+      if (Number.isInteger(total)) return String(total);
+      return String(total);
+    }
+    return "";
+  }
+
   return "";
 }
